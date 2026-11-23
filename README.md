@@ -2,6 +2,18 @@
 
 Digital invitation for the traditional marriage (Igba Nkwu) of **Chidimma Precious Ononye** and **Tochukwu Paul Nzekwesi**. The wedding is on Saturday 26 December 2026 at 12 noon, at Obosi Girls Field in Anambra.
 
+**Live:** [akubutouwa26.vercel.app](https://akubutouwa26.vercel.app) · Designed & built by [ICTech Solutions](https://ictech.ng)
+
+Guests break a wax seal to open velvet doors, then scroll through the invitation in gold on wine:
+- the families' formal invitation card
+- a live countdown
+- a gallery of the pre-wedding shoot
+- an illustrated guide to the Igba Nkwu ceremony
+- the date and venue, with calendar and map links
+- an RSVP form that saves replies to a Google Sheet
+
+"Beautiful" by Phyno plays softly in the background.
+
 ## Stack
 
 | | |
@@ -27,7 +39,7 @@ npm run preview    # serve the production build
 
 Replies are sent to the URL in the `VITE_RSVP_ENDPOINT` environment variable.
 
-- **Free option: a Google Sheet.** Follow the steps at the top of [`docs/rsvp-google-sheet.gs`](docs/rsvp-google-sheet.gs). Every reply becomes a row in the sheet.
+- **Free option: a Google Sheet.** Follow the steps at the top of [`docs/rsvp-google-sheet.gs`](docs/rsvp-google-sheet.gs). Each guest gets one row. If they change their reply, their row is updated and the "Updated" column shows when, instead of a new row being added. Phone numbers are stored as text, so the leading 0 stays.
 - Copy `.env.example` to `.env.local` and paste the URL. Or set the same variable in your host's dashboard.
 - If no URL is set, the site runs in **preview mode**. Replies stay only on the guest's device, and a small note under the button says so.
 

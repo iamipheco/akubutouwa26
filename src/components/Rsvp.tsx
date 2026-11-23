@@ -5,7 +5,7 @@ import { SplitHeading } from './ui/SplitHeading'
 import { useExperience } from '../lib/experience'
 import { useParallax } from '../hooks/useParallax'
 import { EASE } from '../lib/motion'
-import { RSVP_PREVIEW, sendRsvp } from '../lib/rsvp'
+import { RSVP_PREVIEW, lastReply, sendRsvp, type RsvpReply } from '../lib/rsvp'
 import { COUPLE, PHOTOS } from '../data/event'
 
 const E = EASE
@@ -13,21 +13,37 @@ const MAX_GUESTS = 6
 
 const titleCase = (w: string) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
 
+/** The thank-you card's wording for a reply */
+function thanks(r: Pick<RsvpReply, 'name' | 'attending' | 'guests'>) {
+  const first = titleCase(r.name.trim().split(/\s+/)[0])
+  return {
+    title: `Thank you, ${first}!`,
+    text:
+      r.attending === 'yes'
+        ? r.guests > 1
+          ? `We look forward to celebrating with you and ${r.guests - 1} guest${r.guests > 2 ? 's' : ''} on 26 December.`
+          : 'We look forward to celebrating with you on 26 December.'
+        : 'We will miss you, and we appreciate you letting us know.',
+  }
+}
+
 export function Rsvp() {
   const reduce = useReducedMotion()
   const { burst } = useExperience()
   const photo = useParallax(-0.06)
 
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [att, setAtt] = useState<'yes' | 'no' | null>(null)
-  const [guests, setGuests] = useState(1)
-  const [msg, setMsg] = useState('')
+  // a guest who already replied from this device sees their reply, ready to change
+  const [prev] = useState(lastReply)
+  const [name, setName] = useState(prev?.name ?? '')
+  const [phone, setPhone] = useState(prev?.phone ?? '')
+  const [att, setAtt] = useState<'yes' | 'no' | null>(prev?.attending ?? null)
+  const [guests, setGuests] = useState(prev && prev.guests > 0 ? prev.guests : 1)
+  const [msg, setMsg] = useState(prev?.message ?? '')
   const [errName, setErrName] = useState(false)
   const [errAtt, setErrAtt] = useState(false)
   const [errSend, setErrSend] = useState(false)
   const [busy, setBusy] = useState(false)
-  const [done, setDone] = useState<{ title: string; text: string } | null>(null)
+  const [done, setDone] = useState<{ title: string; text: string } | null>(() => (prev ? thanks(prev) : null))
 
   const card = useRef<HTMLDivElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
@@ -51,8 +67,9 @@ export function Rsvp() {
       return
     }
     setBusy(true)
+    let sent: RsvpReply
     try {
-      await sendRsvp({
+      sent = await sendRsvp({
         name: n,
         phone: phone.trim(),
         attending: att,
@@ -66,16 +83,7 @@ export function Rsvp() {
       return
     }
     setBusy(false)
-    const first = titleCase(n.split(/\s+/)[0])
-    setDone({
-      title: `Thank you, ${first}!`,
-      text:
-        att === 'yes'
-          ? guests > 1
-            ? `We look forward to celebrating with you and ${guests - 1} guest${guests > 2 ? 's' : ''} on 26 December.`
-            : 'We look forward to celebrating with you on 26 December.'
-          : 'We will miss you, and we appreciate you letting us know.',
-    })
+    setDone(thanks(sent))
     setTimeout(() => {
       const r = stamp.current?.getBoundingClientRect()
       if (r) burst(r.left + r.width / 2, r.top + r.height / 2, 120)
@@ -228,7 +236,7 @@ export function Rsvp() {
                 </div>
 
                 <button className="btn btn-gold rs-submit" type="submit" disabled={busy} aria-busy={busy}>
-                  {busy ? <span className="spin" aria-hidden="true" /> : <span>Send RSVP</span>}
+                  {busy ? <span className="spin" aria-hidden="true" /> : <span>{prev || done !== null || lastReply() ? 'Update my RSVP' : 'Send RSVP'}</span>}
                   {busy && <span className="sr">Sending</span>}
                 </button>
                 {errSend && <p className="err" style={{ margin: 0, textAlign: 'center' }}>We could not send your reply. Please check your connection and try again.</p>}

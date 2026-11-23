@@ -72,6 +72,12 @@ export function Footer() {
         >
           Close the invitation
         </button>
+        <p className="ft-credit">
+          Designed &amp; built by{' '}
+          <a href="https://ictech.ng" target="_blank" rel="noopener">
+            ICTech Solutions
+          </a>
+        </p>
       </div>
     </footer>
   )

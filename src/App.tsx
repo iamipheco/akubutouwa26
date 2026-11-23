@@ -16,6 +16,7 @@ import { Rsvp } from './components/Rsvp'
 import { Footer } from './components/Footer'
 import { Dock } from './components/Dock'
 import { Toast } from './components/Toast'
+import { MusicToggle } from './components/MusicToggle'
 import { OrnamentDefs } from './components/ui/Ornament'
 
 function Page() {
@@ -38,6 +39,7 @@ function Page() {
       </main>
       <Dock />
       <Toast />
+      <MusicToggle />
       <Cursor />
     </ExperienceProvider>
   )

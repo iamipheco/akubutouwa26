@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useExperience } from '../lib/experience'
 import { COUPLE, HASHTAG, VENUE } from '../data/event'
 import { playSealSound } from '../lib/sound'
+import { startMusic } from '../lib/music'
 
 /** The cover: velvet doors and a wax seal that cracks open to reveal the invitation */
 export function Gate() {
@@ -47,7 +48,9 @@ export function Gate() {
           aria-label="Break the seal and open the invitation"
           onClick={e => {
             if (phase !== 'closed') return
+            e.currentTarget.blur()
             playSealSound()
+            startMusic()
             const r = e.currentTarget.getBoundingClientRect()
             openGate({ x: r.left + r.width / 2, y: r.top + r.height / 2 })
           }}

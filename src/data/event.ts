@@ -14,6 +14,23 @@ export const FAMILIES = {
 
 export const HASHTAG = '#Akubutouwa26'
 
+/**
+ * Background music, starts when the seal is tapped.
+ * The MP3 lives at public/music/beautiful.mp3 (change `src` to swap songs).
+ * If the file is missing the music button simply hides itself.
+ */
+export const MUSIC = {
+  src: '/music/beautiful.mp3',
+  title: 'Beautiful',
+  artist: 'Phyno',
+  /** seconds into the song to begin, e.g. 12 to skip an intro */
+  startAt: 0,
+  /** 0–1 */
+  volume: 0.55,
+  /** seconds to fade in */
+  fadeIn: 3,
+}
+
 /** 26 December 2026, 12:00 West Africa Time (UTC+1) */
 export const EVENT_START = Date.UTC(2026, 11, 26, 11, 0, 0)
 

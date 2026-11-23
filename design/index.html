@@ -151,6 +151,8 @@ section{position:relative;padding-block:clamp(96px,12vw,168px)}
 .seal-ring.b{animation-delay:1.2s}
 @keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.45);opacity:0}}
 .opening .seal-ring{display:none}
+.opening .seal{outline:none!important;pointer-events:none}
+.seal:focus:not(:focus-visible){outline:none}
 .opening .seal-half.l{transform:translate(-110px,40px) rotate(-32deg);opacity:0}
 .opening .seal-half.r{transform:translate(110px,40px) rotate(28deg);opacity:0}
 
@@ -1145,6 +1147,7 @@ section.rs{padding-top:clamp(36px,4vw,64px)}
   setTimeout(() => seal.focus({ preventScroll: true }), 300);
   function openGate() {
     if (gateOpen) return; gateOpen = true;
+    seal.blur();
     playSeal();
     gate.classList.add('opening');
     const r = seal.getBoundingClientRect();

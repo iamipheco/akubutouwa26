@@ -1,0 +1,64 @@
+@layer components {
+  /* ---------- coral-bead scroll progress ---------- */
+  .beadbar { position: fixed; inset: 0 0 auto; z-index: 80; padding-top: env(safe-area-inset-top, 0px); pointer-events: none; transition: opacity .6s; }
+  .beadbar i { display: block; height: 10px; background: var(--bead) repeat-x left center / auto 10px; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .4)); }
+  .locked .beadbar { opacity: 0; }
+
+  /* ---------- gold dust canvas ---------- */
+  .dust { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 105; }
+
+  /* ---------- dock nav ---------- */
+  .dock {
+    position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 70; display: flex; padding: 6px;
+    border-radius: 999px; background: rgba(26, 5, 10, .76); -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid var(--line); box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .9);
+    transform: translate(-50%, 160%); transition: transform .8s var(--ease); max-width: calc(100% - 24px);
+  }
+  .dock.show { transform: translate(-50%, 0); }
+  .dock a {
+    position: relative; z-index: 1; padding: 11px 15px; border-radius: 999px; font-family: var(--f-caps); font-size: 11px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--ivory-2); white-space: nowrap; transition: color .45s;
+  }
+  .dock a:hover { color: var(--ivory); }
+  .dock a.on { color: var(--wine-950); }
+  .dock a > span:not(.dock-ind) { position: relative; z-index: 1; }
+  .dock a svg { display: none; position: relative; z-index: 1; }
+  .dock-ind { position: absolute; z-index: 0; inset: 0; border-radius: 999px; background: linear-gradient(115deg, var(--gold), var(--gold-hi) 50%, var(--gold)); }
+  /* phone: an app-style tab bar with icons */
+  @media (max-width: 600px) {
+    .dock {
+      left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+      max-width: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 6px; border-radius: 22px; transform: translateY(170%);
+    }
+    .dock.show { transform: none; }
+    .dock a { display: grid; justify-items: center; gap: 5px; padding: 9px 0 8px; border-radius: 16px; font-size: 9px; letter-spacing: .14em; }
+    .dock a svg { display: block; width: 20px; height: 20px; }
+    .dock-ind { border-radius: 16px; }
+  }
+
+  /* ---------- toast ---------- */
+  .toast {
+    position: fixed; left: 50%; bottom: calc(88px + env(safe-area-inset-bottom, 0px)); z-index: 115; pointer-events: none;
+    padding: 12px 22px; border-radius: 999px; background: var(--gold); color: var(--wine-950); font-family: var(--f-caps); font-size: 11.5px;
+    font-weight: 600; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .8);
+  }
+  @media (max-width: 699px) { .toast { bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } }
+
+  /* ---------- gold cursor (desktop, fine pointer only) ---------- */
+  .has-cur, .has-cur * { cursor: none !important; }
+  .has-cur input, .has-cur textarea, .has-cur select { cursor: text !important; }
+  .cur { position: fixed; left: 0; top: 0; z-index: 300; pointer-events: none; transition: opacity .35s; }
+  .cur.hide { opacity: 0; }
+  .cur-dot, .cur-ring { position: fixed; left: 0; top: 0; border-radius: 50%; will-change: transform; }
+  .cur-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: var(--gold-hi); box-shadow: 0 0 10px rgba(244, 222, 160, .8); transition: opacity .3s, scale .3s; }
+  .cur-ring {
+    width: 38px; height: 38px; margin: -19px 0 0 -19px; border: 1px solid rgba(244, 222, 160, .55); display: grid; place-items: center;
+    transition: width .5s var(--ease), height .5s var(--ease), margin .5s var(--ease), background-color .4s, border-color .4s, scale .3s var(--ease);
+  }
+  .cur-ring b { font-family: var(--f-caps); font-size: 10px; font-weight: 600; letter-spacing: .22em; padding-left: .22em; color: var(--wine-950); opacity: 0; transform: scale(.5); transition: opacity .3s, transform .5s var(--ease); }
+  .cur.link .cur-ring { width: 58px; height: 58px; margin: -29px 0 0 -29px; background: rgba(214, 176, 92, .1); border-color: var(--gold); }
+  .cur.view .cur-ring { width: 88px; height: 88px; margin: -44px 0 0 -44px; background: rgba(214, 176, 92, .92); border-color: var(--gold-hi); }
+  .cur.view .cur-ring b { opacity: 1; transform: none; }
+  .cur.link .cur-dot, .cur.view .cur-dot { opacity: 0; scale: .3; }
+  .cur.down .cur-ring { scale: .82; }
+}

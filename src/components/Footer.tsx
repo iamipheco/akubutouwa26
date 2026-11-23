@@ -4,6 +4,7 @@ import { Reveal } from './ui/Reveal'
 import { Copy } from './ui/icons'
 import { useCopy, useExperience } from '../lib/experience'
 import { useParallax } from '../hooks/useParallax'
+import { pauseMusic } from '../lib/music'
 import { EASE, EASE_IO } from '../lib/motion'
 import { COUPLE, HASHTAG, PHOTOS } from '../data/event'
 
@@ -61,7 +62,14 @@ export function Footer() {
             <Copy />
           </motion.button>
         </Reveal>
-        <button className="ft-replay" type="button" onClick={replay}>
+        <button
+          className="ft-replay"
+          type="button"
+          onClick={() => {
+            pauseMusic()
+            replay()
+          }}
+        >
           Close the invitation
         </button>
       </div>

@@ -31,6 +31,22 @@ Replies are sent to the URL in the `VITE_RSVP_ENDPOINT` environment variable.
 - Copy `.env.example` to `.env.local` and paste the URL. Or set the same variable in your host's dashboard.
 - If no URL is set, the site runs in **preview mode**. Replies stay only on the guest's device, and a small note under the button says so.
 
+## Music
+
+The site plays "Beautiful" by Phyno in the background.
+
+- **When it starts:** browsers only allow sound after a tap, so the music starts when the guest taps the wax seal. It fades in over about 3 seconds.
+- **Pausing:** a small gold button in the top-right corner pauses and resumes it. The music also pauses while the tab is in the background.
+
+**The song file** is `public/music/beautiful.mp3`. To use a different song, replace that file (or point `src` in `src/data/event.ts` at a new one), then rebuild and redeploy. If the file is missing, there's no music and the button stays hidden.
+
+**Adjust it.** In `src/data/event.ts`, the `MUSIC` settings control:
+- `startAt`: how many seconds into the song to start, for example to skip the intro
+- `volume`: from 0 to 1
+- `fadeIn`: how many seconds the fade-in takes
+
+Aim for a file under about 5 MB, since guests may be on mobile data. A 128 kbps MP3 of the full song is about 4 MB.
+
 ## Share image
 
 When the link is posted on WhatsApp, Facebook or X, those apps show `public/og.jpg` (1200 × 630) as the preview picture.

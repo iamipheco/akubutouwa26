@@ -5,7 +5,8 @@
  */
 let ctx: AudioContext | null = null
 
-function audio() {
+/** One shared AudioContext for the seal sound and the background music */
+export function audio() {
   if (!ctx) {
     const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
     if (!AC) return null

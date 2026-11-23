@@ -514,6 +514,9 @@ section.rs{padding-top:clamp(36px,4vw,64px)}
 @media (max-width:699px){.ft-names{font-size:clamp(60px,17vw,90px);line-height:.9}.ft-names span,.ft-names i{display:block}.ft-names i{margin:.04em 0 .02em}}
 .ft-replay{margin-top:8px;font-family:var(--f-caps);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--line);padding-bottom:4px;transition:border-color .3s,color .3s}
 .ft-replay:hover{color:var(--gold-hi);border-color:var(--gold)}
+.ft-credit{margin:34px 0 0;padding-top:18px;border-top:1px solid rgba(214,176,92,.18);min-width:min(100%,320px);font-family:var(--f-caps);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ivory-3)}
+.ft-credit a{color:var(--gold-hi);text-decoration:none;background:linear-gradient(var(--gold),var(--gold)) 0 100%/0 1px no-repeat;padding-bottom:2px;transition:background-size .5s var(--ease),color .3s}
+.ft-credit a:hover,.ft-credit a:focus-visible{background-size:100% 1px;color:var(--ivory)}
 
 /* ---------- dock ---------- */
 .dock{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;padding:6px;border-radius:999px;background:rgba(26,5,10,.76);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border:1px solid var(--line);box-shadow:0 24px 50px -20px rgba(0,0,0,.9);transform:translate(-50%,160%);transition:transform .8s var(--ease);max-width:calc(100% - 24px)}
@@ -991,6 +994,7 @@ section.rs{padding-top:clamp(36px,4vw,64px)}
         <button class="icon-btn" type="button" data-copy="#Akubutouwa26" aria-label="Copy the hashtag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg></button>
       </div>
       <button class="ft-replay" type="button" id="replay">Close the invitation</button>
+      <p class="ft-credit">Designed &amp; built by <a href="https://ictech.ng" target="_blank" rel="noopener">ICTech Solutions</a></p>
     </div>
   </footer>
 </main>

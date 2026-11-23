@@ -173,6 +173,16 @@
     border-bottom: 1px solid var(--line); padding-bottom: 4px; transition: border-color .3s, color .3s;
   }
   .ft-replay:hover { color: var(--gold-hi); border-color: var(--gold); }
+  /* maker's credit: quiet, at the very end */
+  .ft-credit {
+    margin: 34px 0 0; padding-top: 18px; border-top: 1px solid rgba(214, 176, 92, .18); min-width: min(100%, 320px);
+    font-family: var(--f-caps); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--ivory-3);
+  }
+  .ft-credit a {
+    color: var(--gold-hi); text-decoration: none; background: linear-gradient(var(--gold), var(--gold)) 0 100% / 0 1px no-repeat;
+    padding-bottom: 2px; transition: background-size .5s var(--ease), color .3s;
+  }
+  .ft-credit a:hover, .ft-credit a:focus-visible { background-size: 100% 1px; color: var(--ivory); }
   @media (max-width: 699px) {
     .ft { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
     .ft-names { font-size: clamp(60px, 17vw, 90px); line-height: .9; }
